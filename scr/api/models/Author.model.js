@@ -6,6 +6,7 @@ const authorSchema = new mongoose.Schema({
     dateOfBirth : { type: String },
     nationality: { type: String, required: true },
     biography: { type: String },
+    profileImg: { type: String },
     genre: { type: String, required: true, enum: [
         "Biography",
         "Classic Literature",

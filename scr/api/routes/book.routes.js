@@ -8,7 +8,7 @@ router.get('/', getAllBooks);
 router.get('/:id', getBookById)
 router.get('/genre/:genre', getBooksByGenre);
 router.post('/create', upload.single("bookCoverImg"), postBook);
-router.put('/:id', updateBook);
+router.put('/:id',upload.single("bookCoverImg"),  updateBook);
 router.delete('/:id', deleteBook)
 
 module.exports = router;

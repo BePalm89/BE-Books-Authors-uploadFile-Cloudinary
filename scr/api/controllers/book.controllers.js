@@ -59,9 +59,18 @@ const postBook = async (req, res, next ) => {
 const updateBook = async ( req, res, next ) => {
     const { id } = req.params;
     try {
+        const book = await Book.findById(id);
+        if( book.bookCoverImg && req.file ) {
+            deleteFile(book.bookCoverImg);
+        }
 
         const modifiedBook = new Book(req.body);
         modifiedBook._id = id;
+
+        if(req.file) {
+            modifiedBook.bookCoverImg = req.file.path;
+        }
+
         const updateBook = await Book.findByIdAndUpdate(id, modifiedBook, { new: true });
         return res.status(200).json(updateBook);
 
