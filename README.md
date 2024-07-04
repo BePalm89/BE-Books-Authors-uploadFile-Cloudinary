@@ -1,8 +1,21 @@
 # BE-Books-Authors-uploadFile-Cloudinary
 
 In this BE project, I create an Express server, that is connected with MongoDB through mongoose. There are two different models, `Author`, `Book`. The two models are related to each other, due to a property called `Author` in the `Book` model.
-The `Book` model has also a property called `coverPageImg` to store an image in cloudinary.
-I create a middleware to upload the file in cloudinary and a utility class called `deleteFile` in order to be able to delete the cover book image when a particular book is deleted from the DB.
+The `Book` model has a property called `coverPageImg` to store an image in cloudinary, and the `Author` model has a property called `profileImg` to store an image in cloudinary as well.
+I create a middleware to upload the file in cloudinary and a utility class called `deleteFile` in order to be able to delete the cover book image when a particular book is deleted from the DB. In addition, when update an author or a book, it is possible to replace the image in cloudinary, deleting the old image and uploading the new one.
+
+### Acceptance criteria:
+
+- [x] Server using Express
+- [x] Connection to a Mongo Atlas database using Mongoose
+- [x] Creation of two models, both with a field that allows storing a file
+- [x] A seed script that uploads data to one of the collections
+- [x] A relationship between collections
+- [x] Complete CRUD operations for all collections
+- [x] README.md with project documentation, indicating the endpoints and what each one does
+- [x] File uploads to both collections using Cloudinary
+- [x] Deletion of files in Cloudinary when the data is deleted in the database
+- [x] Attempt to reuse Cloudinary storage by changing the folder (can be commented out)
 
 ### Author model:
 
@@ -12,6 +25,7 @@ I create a middleware to upload the file in cloudinary and a utility class calle
     dateOfBirth : { type: String },
     nationality: { type: String, required: true },
     biography: { type: String },
+    profileImg: { type: String },
     genre: { type: String, required: true, enum: [
         "Biography",
         "Classic Literature",
@@ -24,6 +38,7 @@ I create a middleware to upload the file in cloudinary and a utility class calle
         "Romance",
         "Thriller",
     ]},
+
 },
 { timeStamp: true, collection: "authors"}
 ```
